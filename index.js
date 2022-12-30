@@ -1,7 +1,7 @@
 var finances = [
   ['Jan-2010', 867884],
-  ['Feb-2010', 984655],
-  ['Mar-2010', 322013],
+  ['Feb-2010', 984655], // -116771
+  ['Mar-2010', 322013], // 662642
   ['Apr-2010', -69417],
   ['May-2010', 310503],
   ['Jun-2010', 522857],
@@ -87,6 +87,8 @@ var finances = [
   ['Feb-2017', 671099]
   ];
 
+  // console.log(finances)
+
 // Your task is to write JavaScript code that analyzes the records to calculate each of the following:
 
 // The total number of months included in the dataset.
@@ -94,7 +96,7 @@ var finances = [
   // array.length
   // Need a variable to store the value of array.length
   var totalMonths = finances.length;
-  console.log(totalMonths)
+  console.log("Total months: " + totalMonths)
 
 // The net total amount of Profit / Losses over the entire period.
   // Adding up the money
@@ -105,24 +107,68 @@ var finances = [
   var totalAmount = 0;
   
   for(i = 0; i < finances.length; i++){
-    console.log("i is now = " + i);
+    // console.log("i is now = " + i);
     var data = finances[i]
-    console.log(data)
+    // console.log(data)
     var num = data[1]
-    console.log(num)
+    // console.log(num)
     totalAmount = totalAmount + num;
   }
 
-  console.log(totalAmount)
+  console.log("Total amount: " + totalAmount)
 
 
 // The average of the changes in Profit / Losses over the entire period.
 // You will need to track what the total change in profits are from month to month and then find the average.
 // (Total / Number of months)
+var totalChange = 0;
+var changeArr = [];
+
+for(i = 1; i < finances.length; i++) {
+  var num1 = finances[i-1][1];
+  var num2 = finances[i][1];
+
+  var change = num1 - num2;
+  changeArr.push(change)
+  totalChange = totalChange + change;
+}
+
+var averageChange = totalChange/totalMonths
+console.log("Average change: " + Math.round(averageChange * 100)/100)
 
 // The greatest increase in profits(date and amount) over the entire period.
 
 // The greatest decrease in losses(date and amount) over the entire period.
+
+var greatestIncrease = 0;
+var greatestDecrease = 0;
+
+for(i = 1; i < changeArr.length; i++) {
+  var num1 = changeArr[i-1];
+  var num2 = changeArr[i];
+
+  var highest;
+  var lowest;
+
+  if(num1 < num2) {
+    lowest = num1;
+    highest = num2;
+  } else {
+    lowest = num2;
+    highest = num1;
+  }
+
+  if(highest > greatestIncrease) {
+    greatestIncrease = highest;
+  }
+
+  if(lowest < greatestDecrease) {
+    greatestDecrease = lowest;
+  }
+}
+
+console.log("Greatest Increase: " + greatestIncrease);
+console.log("Greatest Decrease: " + greatestDecrease);
 
   // Total up the differences between each pair of adjoining months & divide by number of array elements
   // for loop starting with i = 1
