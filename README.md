@@ -40,5 +40,10 @@ When the browser is opened my resulting analysis should look similar to the foll
   Greatest Decrease in Profits: Sep-2013 ($-2196167)
   ```
 
-My final code should print the analysis to the console.
+![My final code prints the analysis to the console as shown.](./images/console.log-data.png)
+
+[Deployed Link](https://lawzstopwar.github.io/Console-Finances/)
+
+
+
 
